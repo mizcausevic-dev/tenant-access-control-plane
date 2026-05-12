@@ -1,6 +1,10 @@
 # Tenant Access Control Plane
 
-Next.js flagship for tenant access governance, GraphQL contracts, role-aware approval flows, and production-style delivery assets.
+Next.js flagship for **tenant access governance**, GraphQL contracts, role-aware approval flows, and production-style delivery assets.
+
+> **What this repo proves**
+>
+> This is the broad-appeal full-stack control plane in the portfolio: modern frontend, typed API contract, real data layer, auth posture, tests, CI, and deploy assets in one product-shaped repo.
 
 ## Why this repo exists
 
