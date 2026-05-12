@@ -1,0 +1,6 @@
+apiVersion: v2
+name: tenant-access-control-plane
+description: Helm chart for the Tenant Access Control Plane flagship app
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

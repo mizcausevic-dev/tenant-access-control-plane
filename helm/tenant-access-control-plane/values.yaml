@@ -1,0 +1,10 @@
+image:
+  repository: ghcr.io/mizcausevic-dev/tenant-access-control-plane
+  tag: latest
+
+service:
+  port: 80
+  targetPort: 3000
+
+env:
+  port: "3000"

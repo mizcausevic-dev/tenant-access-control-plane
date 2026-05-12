@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tenant Access Control Plane
 
-## Getting Started
+Next.js flagship for tenant access governance, GraphQL contracts, role-aware approval flows, and production-style delivery assets.
 
-First, run the development server:
+## Why this repo exists
 
-```bash
+This project closes the biggest broad-appeal gap in the portfolio:
+
+- a modern full-stack app
+- a real data layer
+- a typed API contract
+- auth posture
+- caching
+- tests
+- CI
+- deploy assets
+
+It is intentionally local-first. You can boot it without Docker, Postgres, or Redis and still get the full experience. When those services are available, the same code path upgrades into a more production-shaped deployment.
+
+## Stack
+
+- Next.js App Router
+- Tailwind CSS
+- GraphQL Yoga
+- Zustand
+- Drizzle ORM
+- PGlite local runtime with optional PostgreSQL
+- Redis-ready cache fallback
+- Signed demo session cookies with OIDC-ready configuration
+- Vitest
+- Playwright
+- GitHub Actions
+- Docker, Kubernetes manifests, and Helm chart
+
+## One-shot local run
+
+```powershell
+Set-Location "C:\Users\chaus\dev\repos\tenant-access-control-plane"
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [http://127.0.0.1:3000/](http://127.0.0.1:3000/)
+- [http://127.0.0.1:3000/docs](http://127.0.0.1:3000/docs)
+- [http://127.0.0.1:3000/api/graphql](http://127.0.0.1:3000/api/graphql)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Optional production-style services
 
-## Learn More
+Create `.env.local` from [.env.example](./.env.example) and set any of the following:
 
-To learn more about Next.js, take a look at the following resources:
+- `DATABASE_URL`
+- `REDIS_URL`
+- `OIDC_ISSUER`
+- `OIDC_CLIENT_ID`
+- `OIDC_CLIENT_SECRET`
+- `SESSION_SECRET`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If `DATABASE_URL` is not set, the repo falls back to a persistent local PGlite store under `.data/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If `REDIS_URL` is not set, the repo falls back to an in-memory TTL cache.
 
-## Deploy on Vercel
+## Verification
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```powershell
+npm run lint
+npm run test
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optional e2e:
+
+```powershell
+npx playwright install chromium
+npm run test:e2e
+```
+
+## GraphQL example
+
+```graphql
+query DashboardSnapshot {
+  dashboardSummary {
+    cacheMode
+    metrics {
+      label
+      value
+      change
+    }
+  }
+}
+```
+
+## Deployment assets
+
+- [Dockerfile](./Dockerfile)
+- [docker-compose.yml](./docker-compose.yml)
+- [k8s](./k8s)
+- [helm/tenant-access-control-plane](./helm/tenant-access-control-plane)
+- [.github/workflows/ci.yml](./.github/workflows/ci.yml)
+
+## Screenshots
+
+### Overview
+![Overview](./screenshots/01-overview.png)
+
+### GraphQL Contract
+![GraphQL](./screenshots/02-graphql.png)
+
+### Delivery Surface
+![Deploy](./screenshots/03-deploy.png)
+
+### Docs
+![Docs](./screenshots/04-docs.png)
+
+## Repo anatomy
+
+- [src/app/page.tsx](./src/app/page.tsx)
+- [src/components/control-plane.tsx](./src/components/control-plane.tsx)
+- [src/lib/domain/service.ts](./src/lib/domain/service.ts)
+- [src/lib/graphql/schema.ts](./src/lib/graphql/schema.ts)
+- [src/lib/db/schema.ts](./src/lib/db/schema.ts)
+- [docs/architecture.md](./docs/architecture.md)

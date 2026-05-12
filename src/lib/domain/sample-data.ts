@@ -1,0 +1,181 @@
+import type { PersonaSummary } from "./types";
+
+export const personas: PersonaSummary[] = [
+  {
+    id: "security-admin",
+    name: "Anaya Cole",
+    title: "Security Administration Lead",
+    focus: "Privilege escalation, policy path hardening, and audit-safe approvals.",
+  },
+  {
+    id: "support-lead",
+    name: "Luis Ortega",
+    title: "Support Operations Lead",
+    focus: "Urgent tenant unblock requests, incident-safe elevation windows, and response speed.",
+  },
+  {
+    id: "product-ops",
+    name: "Mira Sethi",
+    title: "Product Operations Manager",
+    focus: "Launch approvals, customer-impact triage, and tenant rollout coordination.",
+  },
+];
+
+export const seededTenants = [
+  {
+    id: "tenant-northstar",
+    name: "Northstar Health",
+    region: "us-east-1",
+    tier: "Enterprise",
+    identityProvider: "Okta Workforce",
+    riskLevel: "High",
+    seatUtilization: 92,
+    approvalLatencyHours: 14,
+  },
+  {
+    id: "tenant-aurora",
+    name: "Aurora Retail",
+    region: "eu-west-1",
+    tier: "Growth",
+    identityProvider: "Microsoft Entra ID",
+    riskLevel: "Moderate",
+    seatUtilization: 77,
+    approvalLatencyHours: 6,
+  },
+  {
+    id: "tenant-summit",
+    name: "Summit Payments",
+    region: "us-west-2",
+    tier: "Strategic",
+    identityProvider: "PingFederate",
+    riskLevel: "Critical",
+    seatUtilization: 96,
+    approvalLatencyHours: 19,
+  },
+];
+
+export const seededMemberships = [
+  {
+    id: "member-001",
+    tenantId: "tenant-northstar",
+    displayName: "Rina Alvarez",
+    roleTitle: "Clinic Ops Manager",
+    accessScope: "patient-billing-admin",
+    oidcSubject: "okta|rina.alvarez",
+    lastAccessedAt: "2026-05-11T09:44:00.000Z",
+    elevationFlag: false,
+  },
+  {
+    id: "member-002",
+    tenantId: "tenant-aurora",
+    displayName: "Jonas Meyer",
+    roleTitle: "Support Escalation Engineer",
+    accessScope: "catalog-editor-preview",
+    oidcSubject: "entra|jonas.meyer",
+    lastAccessedAt: "2026-05-11T14:21:00.000Z",
+    elevationFlag: true,
+  },
+  {
+    id: "member-003",
+    tenantId: "tenant-summit",
+    displayName: "Kei Tan",
+    roleTitle: "Payments Reliability Lead",
+    accessScope: "settlement-write",
+    oidcSubject: "ping|kei.tan",
+    lastAccessedAt: "2026-05-11T16:12:00.000Z",
+    elevationFlag: true,
+  },
+];
+
+export const seededRequests = [
+  {
+    id: "req-9001",
+    tenantId: "tenant-northstar",
+    requestorName: "Rina Alvarez",
+    requestorRole: "Clinic Ops Manager",
+    targetResource: "Billing export console",
+    requestedScope: "billing-admin:elevated",
+    reason:
+      "Need a 90-minute override to clear delayed reimbursements before nightly settlement.",
+    status: "pending-approval",
+    riskScore: 86,
+    requiresApproval: true,
+    createdAt: "2026-05-11T18:10:00.000Z",
+    expiresAt: "2026-05-11T19:40:00.000Z",
+    policyPath: "break-glass > finance approvals > audit snapshot",
+    cachedPolicy: true,
+  },
+  {
+    id: "req-9002",
+    tenantId: "tenant-aurora",
+    requestorName: "Jonas Meyer",
+    requestorRole: "Support Escalation Engineer",
+    targetResource: "Catalog preview plane",
+    requestedScope: "preview:catalog-editor",
+    reason:
+      "Need preview access for a premium customer launch rehearsal tied to tomorrow's regional rollout.",
+    status: "reviewing",
+    riskScore: 42,
+    requiresApproval: false,
+    createdAt: "2026-05-11T17:45:00.000Z",
+    expiresAt: "2026-05-12T03:00:00.000Z",
+    policyPath: "preview-safe > support owner > customer success watch",
+    cachedPolicy: true,
+  },
+  {
+    id: "req-9003",
+    tenantId: "tenant-summit",
+    requestorName: "Kei Tan",
+    requestorRole: "Payments Reliability Lead",
+    targetResource: "Settlement admin lane",
+    requestedScope: "payments:settlement-write",
+    reason:
+      "Need direct access to re-route a replay batch while a fraud scoring regression is under investigation.",
+    status: "blocked",
+    riskScore: 97,
+    requiresApproval: true,
+    createdAt: "2026-05-11T16:55:00.000Z",
+    expiresAt: "2026-05-11T17:55:00.000Z",
+    policyPath: "critical-funds > security hold > multi-owner signoff",
+    cachedPolicy: false,
+  },
+];
+
+export const seededTimeline = [
+  {
+    id: "evt-1001",
+    requestId: "req-9001",
+    stage: "Identity verified",
+    owner: "OIDC bridge",
+    outcome: "Pass",
+    note: "Subject claim aligned with existing tenant binding.",
+    createdAt: "2026-05-11T18:10:40.000Z",
+  },
+  {
+    id: "evt-1002",
+    requestId: "req-9001",
+    stage: "Policy cache",
+    owner: "Redis tier",
+    outcome: "Warm",
+    note: "Break-glass lane loaded from prior finance exception policy snapshot.",
+    createdAt: "2026-05-11T18:10:54.000Z",
+  },
+  {
+    id: "evt-1003",
+    requestId: "req-9002",
+    stage: "Preview gate",
+    owner: "Support owner",
+    outcome: "Reviewing",
+    note: "Preview request routed to customer launch watchlist instead of full security hold.",
+    createdAt: "2026-05-11T17:46:10.000Z",
+  },
+  {
+    id: "evt-1004",
+    requestId: "req-9003",
+    stage: "Critical funds lane",
+    owner: "Fraud platform",
+    outcome: "Blocked",
+    note: "Requested scope touches settlement write path during active fraud regression incident.",
+    createdAt: "2026-05-11T16:56:18.000Z",
+  },
+];
