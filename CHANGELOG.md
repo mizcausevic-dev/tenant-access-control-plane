@@ -1,70 +1,40 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to this project are documented here.
-
-This log is intentionally written as an engineering record rather than a launch theater timeline. Dates reflect when the concept, design, prototype, and public packaging phases were mature enough to document.
 
 ## [1.0.0] - 2026-05-12
 
 ### Released
-- Published **tenant-access-control-plane** as a public, portfolio-grade identity governance system.
-- Packaged the current implementation, documentation, validation workflow, and proof surfaces into a repo that could be reviewed by engineering, product, and operating stakeholders.
-- Tightened the repo story around the real-world operating problem: identity sprawl, tenant-boundary risk, and access-review friction.
+- Published **tenant-access-control-plane** as the flagship full-stack access-governance repo in the portfolio.
+- Brought together GraphQL contracts, role-aware workflows, identity-boundary reasoning, and production delivery assets in one control-plane story.
+- Positioned the repo around the real operating problem: access decisions are often explainability problems before they are UI problems.
 
 ### Why this mattered
-- Existing approaches in IGA suites, ticket-based approvals, and access review campaigns were useful for adjacent workflows.
-- They still missed the core need: fast, explainable control decisions at the moment operators actually needed to act.
-- This release made the repo readable as an operational capability rather than a narrow technical demo.
+- Many modern stacks can approve access requests. Far fewer can explain tenant-boundary risk, reviewer accountability, and control intent in a way platform and compliance teams can trust.
+- Existing IGA workflows often pushed critical context into tickets, spreadsheets, or tribal memory.
+- This release made the repo credible as a product-style control plane rather than a stack checklist.
 
-## [0.1.0] - 2026-03-13
+## [0.1.0] - 2026-03-03
 
 ### Shipped
-- Cut the first coherent internal version of the product shape behind **tenant-access-control-plane**.
-- Standardized the core objects, decision surfaces, and operator outputs around the repo's main working problem.
-- Established the first reviewable version of the architecture described as: Next.js control plane for tenant access governance, GraphQL APIs, role-aware workflows, and production-style delivery assets.
+- Cut the first coherent model for tenants, roles, requests, approvals, and review pressure.
+- Added the first end-to-end operator surfaces for explaining why a request should move, pause, or escalate.
 
-### Notes
-- This milestone was less about polish and more about proving the operating model.
-- The emphasis was on turning a messy domain problem into something a real team could reason about in CI, review, or day-to-day operations.
-
-## [Prototype] - 2025-08-18
+## [Prototype] - 2025-06-17
 
 ### Built
-- Created the first runnable prototype for the repo's core workflow and decision model.
-- Started validating the design against real operating pressures instead of idealized sample flows.
-- Added enough shape to test whether the project could surface action, not just information.
+- Prototyped tenant-scoped request evaluation and boundary-sensitive routing logic.
+- Proved the concept against familiar failure modes such as least-privilege drift and cross-tenant review ambiguity.
 
-### Problem pressure
-- The prototype phase was shaped by concrete issues such as identity sprawl, least-privilege drift, tenant-boundary mistakes, and approval latency.
-- This was the point where the project moved from a sketch into something worth hardening.
-
-## [Design Phase] - 2023-01-15
+## [Design Phase] - 2024-02-08
 
 ### Designed
-- Defined the core philosophy for the system:
-  - operator-first
-  - decision-legible
-  - CI- and review-friendly
-  - suitable for mixed technical and business audiences
-- Chose outputs that would make the repo useful to real operators instead of just visually impressive.
-- Focused the design on explainability, evidence, and next-best action rather than passive reporting.
+- Chose a control-plane framing instead of another CRUD admin app.
+- Anchored the design in tenant isolation, access evidence, and approval explainability.
+- Kept delivery assets close to the repo so the system felt production-minded from the start.
 
-### Rejected approaches
-- Avoided turning the repo into a generic dashboard or CRUD exercise.
-- Avoided thin wrapper patterns that would hide the actual operating problem behind fashionable tooling choices.
-
-## [Idea Origin] - 2022-03-15
+## [Idea Origin] - 2023-05-11
 
 ### Observed
-- The initial idea surfaced while looking at how teams were handling identity sprawl, tenant-boundary risk, and access-review friction.
-- The recurring pattern was that people could often see fragments of the problem, but not the whole operational story in one place.
-
-### Insight
-- The missing product was not another point solution. It was a clearer operating layer that made the work legible to IAM, platform security, and compliance teams.
-- That insight became the basis for **tenant-access-control-plane**.
-
-## [Background Signals] - 2022-08-09
-
-### Context
-- Earlier platform, governance, and operator-tooling work made one pattern obvious: the dangerous systems are rarely the ones with no controls at all. They are the ones where controls exist, but are fragmented, weakly owned, and hard to read under pressure.
-- That pattern shaped this project long before the public repo existed.
+- The idea emerged from repeated enterprise cases where access requests were technically processed but operationally under-explained.
+- The missing layer was a fast, legible access-control surface for platform and governance teams.
