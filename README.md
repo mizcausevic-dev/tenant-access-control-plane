@@ -39,7 +39,7 @@ It is intentionally local-first. You can boot it without Docker, Postgres, or Re
 ## One-shot local run
 
 ```powershell
-Set-Location "C:\Users\chaus\dev\repos\tenant-access-control-plane"
+cd tenant-access-control-plane
 npm install
 npm run dev
 ```
